@@ -1,6 +1,7 @@
 import url from 'url';
 import { StringDecoder } from 'string_decoder';
-import handlers from './lib/routeHandlers.js';
+import handlers from './lib/requestHandlers.js';
+import helpers from './lib/helpers.js';
 
 
 
@@ -8,6 +9,7 @@ import handlers from './lib/routeHandlers.js';
 // Define a request router
 const router = {
     ping: handlers.ping,
+    users: handlers.users,
     notFound: handlers.notFound
 };
 
@@ -45,7 +47,7 @@ const unifiedServer = (req, res) => {
             queryStringObject,
             headers,
             method,
-            payload: buffer
+            payload: helpers.parseJsonToObject(buffer)
         };
 
         // route the request to the proper handler
