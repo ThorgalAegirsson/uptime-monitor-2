@@ -10,6 +10,7 @@ import helpers from './lib/helpers.js';
 const router = {
     ping: handlers.ping,
     users: handlers.users,
+    tokens: handlers.tokens,
     notFound: handlers.notFound
 };
 
