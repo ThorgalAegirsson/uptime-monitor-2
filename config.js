@@ -13,7 +13,12 @@ environments.staging = {
     envName: 'staging',
     hashingSecret: 'thisIsASecret',
     maxFreeChecks: 5,
-    maxPaidChecks: 100
+    maxPaidChecks: 100,
+    twilio: {
+        accountSid: 'AC8dbc224e5c3b5b6a4f31e451f4f7d0f6',
+        authToken: '53df31ce85a240d7f44e2be4dbdf321d',
+        fromPhone: '+18482855763'
+    }
 };
 
 // Production object
@@ -23,7 +28,12 @@ environments.production = {
     envName: 'production',
     hashingSecret: 'thisIsAlsoASecret', 
     maxFreeChecks: 5,
-    maxPaidChecks: 100
+    maxPaidChecks: 100,
+    twilio: {
+        accountSid: 'AC8dbc224e5c3b5b6a4f31e451f4f7d0f6',
+        authToken: '53df31ce85a240d7f44e2be4dbdf321d',
+        fromPhone: '+18482855763'
+    }
 };
 
 // Determine the environment to use and export it

@@ -1,13 +1,23 @@
+/**
+ *  SERVER related tasks
+ * 
+ */
+
+// Dependencies
+import http from 'http';
+import https from 'https';
+import fs from 'fs';
 import url from 'url';
+import path from 'path';
 import { StringDecoder } from 'string_decoder';
 import handlers from './lib/requestHandlers.js';
 import helpers from './lib/helpers.js';
+import config from './config.js';
 
-
-
+const server = {};
 
 // Define a request router
-const router = {
+const _router = {
     ping: handlers.ping,
     users: handlers.users,
     tokens: handlers.tokens,
@@ -41,7 +51,7 @@ const unifiedServer = (req, res) => {
         // send the response
 
         //choose the request handler
-        const chosenHandler = typeof router[trimmedPath] !== 'undefined' ? router[trimmedPath] : handlers.notFound;
+        const chosenHandler = typeof _router[trimmedPath] !== 'undefined' ? _router[trimmedPath] : handlers.notFound;
 
         // create a data object sent to the handler
         const data = {
@@ -67,4 +77,25 @@ const unifiedServer = (req, res) => {
     })
 };
 
-export default unifiedServer;
+const _httpsServerOptions = {
+    key: fs.readFileSync('./https/key.pem'),
+    cert: fs.readFileSync('./https/cert.pem')
+};
+
+
+
+server.httpServer = http.createServer(unifiedServer);
+
+server.httpsServer = https.createServer(_httpsServerOptions, unifiedServer);
+
+server.init = () => {
+    server.httpServer.listen(config.httpPort, () => {
+        console.log(`The HTTP server is listening on port ${config.httpPort} in ${config.envName} mode`);
+    });
+
+    server.httpsServer.listen(config.httpsPort, () => {
+        console.log(`The HTTPS server is listening on port ${config.httpsPort} in ${config.envName} mode`);
+    });
+};
+
+export default server;
