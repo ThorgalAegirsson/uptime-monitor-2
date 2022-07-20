@@ -8,7 +8,6 @@ import http from 'http';
 import https from 'https';
 import fs from 'fs';
 import url from 'url';
-import path from 'path';
 import { StringDecoder } from 'string_decoder';
 import handlers from './lib/requestHandlers.js';
 import helpers from './lib/helpers.js';

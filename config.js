@@ -18,7 +18,9 @@ environments.staging = {
         accountSid: 'AC8dbc224e5c3b5b6a4f31e451f4f7d0f6',
         authToken: '53df31ce85a240d7f44e2be4dbdf321d',
         fromPhone: '+18482855763'
-    }
+    },
+    paidInterval: 500 * 60,
+    freeInterval: 1000 * 60
 };
 
 // Production object
@@ -33,7 +35,9 @@ environments.production = {
         accountSid: 'AC8dbc224e5c3b5b6a4f31e451f4f7d0f6',
         authToken: '53df31ce85a240d7f44e2be4dbdf321d',
         fromPhone: '+18482855763'
-    }
+    },
+    paidInterval: 500 * 60,
+    freeInterval: 1000 * 60
 };
 
 // Determine the environment to use and export it
